@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getFirestore} from 'firebase/firestore'
+import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -14,10 +14,19 @@ const firebaseConfig = {
   storageBucket: "mern-task-ef997.appspot.com",
   messagingSenderId: "77447553378",
   appId: "1:77447553378:web:5438ec1181840811330c3b",
-  measurementId: "G-F7KVNTKSLV"
+  measurementId: "G-F7KVNTKSLV",
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
-export const db = getFirestore(app);
+
+let app;
+let analytics;
+let db;
+
+if (process.browser) {
+  app = initializeApp(firebaseConfig);
+  analytics = getAnalytics(app);
+  db = getFirestore(app);
+}
+
+export { app, analytics, db };
