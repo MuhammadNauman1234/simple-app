@@ -20,14 +20,16 @@ const Dashboard = () => {
 
   const saveToDatabase = async () => {
     studentRecords.forEach(async (record) => {
-      const addRecord = await addDoc(recordsRef, record);
-      if(addRecord){
-        router.push('/studentsrecords')
-      }
-
-    });
-
-    console.log("Saving to Firestore:", studentRecords);
+        try {
+          const addRecord = await addDoc(recordsRef, record);
+          if (addRecord) {
+            console.log("Record saved successfully:", record);
+            router.push('/studentsrecords');
+          }
+        } catch (error) {
+          console.error("Error saving record:", error);
+        }
+      });
   };
 
 

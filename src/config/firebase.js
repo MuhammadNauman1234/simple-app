@@ -23,7 +23,8 @@ let app;
 let analytics;
 let db;
 
-if (process.browser) {
+// Check if running in the browser environment
+if (typeof window !== 'undefined') {
   app = initializeApp(firebaseConfig);
   analytics = getAnalytics(app);
   db = getFirestore(app);
